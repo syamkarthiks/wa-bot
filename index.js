@@ -1,13 +1,15 @@
 require("dotenv").config()
 const fs = require("fs")
+
 const {
   default: makeWASocket,
-  useMultiFileAuthState
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion
 } = require("@whiskeysockets/baileys")
 
 async function start() {
   if (!process.env.SESSION_ID) {
-    console.log("No SESSION_ID")
+    console.log("SESSION_ID missing")
     return
   }
 
@@ -17,8 +19,14 @@ async function start() {
   fs.writeFileSync("./session/creds.json", decoded)
 
   const { state, saveCreds } = await useMultiFileAuthState("session")
+  const { version } = await fetchLatestBaileysVersion()
 
-  const sock = makeWASocket({ auth: state })
+  const sock = makeWASocket({
+    auth: state,
+    version,
+    browser: ["Chrome", "Linux", "120.0"]
+  })
+
   sock.ev.on("creds.update", saveCreds)
 
   sock.ev.on("connection.update", async ({ connection }) => {
