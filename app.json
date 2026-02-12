@@ -1,0 +1,29 @@
+{
+  "name": "whatsapp-bot",
+  "description": "",
+  "repository": "https://github.com/naxordeve/whatsapp-bot",
+  "keywords": ["nodejs", "whatsapp", "garfield"],
+  "success_url": "/",
+  "env": {
+    "PREFIX": {
+      "description": "Prefix for bot commands",
+      "value": "/"
+    },
+    "OWNER_NUMBER": {
+      "description": "WhatsApp number of the bot owner",
+      "value": "27686881509"
+    },
+    "SESSION_ID": {
+      "description": "WhatsApp session ID",
+      "required": true
+    },
+    "THEME": {
+      "description": "Bot theme Garfield",
+      "required": true
+    },
+    "WORK_TYPE": {
+      "description": "Bot work type (private/public)",
+      "value": "private"
+    }
+  }
+}
